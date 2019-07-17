@@ -150,7 +150,76 @@ public class Game {
      */
     public String checkGameWinner(char [][]grid){
         String result = "None";
-        //Student code goes here ...
+        int empty, vertX, vertO, horizX, horizO;
+        empty = vertX = vertO = horizX = horizO = 0;
+
+        //check vertical
+        for (int i = 0; i <= 2; i++)
+        {
+            for (int j = 0; j <= 2; j++)
+            {
+                if (grid[i][j] == '-')
+                {
+                    empty++;
+                }
+                else if (grid[i][j] == 'x')
+                {
+                    vertX++;
+                }
+                else
+                {
+                    vertO++;
+                }
+            }
+            if (vertO == 3 || vertX == 3)
+            {
+                break;
+            }
+            else
+            {
+                vertO = vertX = 0;
+            }
+        }
+
+        //check horizontal
+        for (int j = 0; j <= 2; j++)
+        {
+            for (int i = 0; i <= 2; i++)
+            {
+                if (grid[i][j] == 'x')
+                {
+                    horizX++;
+                }
+                else if (grid[i][j] == 'o')
+                {
+                    horizO++;
+                }
+            }
+            if (horizO == 3 || horizX == 3)
+            {
+                break;
+            }
+            else
+            {
+                horizO = horizX = 0;
+            }
+        }
+
+        //check diagonal
+        if ((grid[0][0] == 'x' && grid[1][1] == 'x' && grid[2][2] == 'x') || (grid[0][2] == 'x' && grid[1][1] == 'x' && grid[2][0] == 'x') || vertX == 3 || horizX == 3)
+        {
+            result = "X wins";
+        }
+        else if ((grid[0][0] == 'o' && grid[1][1] == 'o' && grid[2][2] == 'o') || (grid[0][2] == 'o' && grid[1][1] == 'o' && grid[2][0] == 'o') || vertO == 3 || horizO == 3)
+        {
+            result = "O wins";
+        }
+        else if(empty == 0)
+        {
+            result = "Tie";
+        }
+
+
         return result;
     }
 
